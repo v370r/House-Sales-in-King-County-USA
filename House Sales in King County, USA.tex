@@ -1,0 +1,1057 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{House Sales in King County, USA}
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{IMPORTING}\label{importing}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{pipeline} \PY{k}{import} \PY{n}{Pipeline}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{StandardScaler}\PY{p}{,}\PY{n}{PolynomialFeatures}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{Ridge}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{cross\PYZus{}val\PYZus{}score}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{Ridge}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+    \subsection{Import Data}\label{import-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df}\PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://s3\PYZhy{}api.us\PYZhy{}geo.objectstorage.softlayer.net/cf\PYZhy{}courses\PYZhy{}data/CognitiveClass/DA0101EN/coursera/project/kc\PYZus{}house\PYZus{}data\PYZus{}NaN.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}    Unnamed: 0          id             date     price  bedrooms  bathrooms  \textbackslash{}
+        0           0  7129300520  20141013T000000  221900.0       3.0       1.00   
+        1           1  6414100192  20141209T000000  538000.0       3.0       2.25   
+        2           2  5631500400  20150225T000000  180000.0       2.0       1.00   
+        3           3  2487200875  20141209T000000  604000.0       4.0       3.00   
+        4           4  1954400510  20150218T000000  510000.0       3.0       2.00   
+        
+           sqft\_living  sqft\_lot  floors  waterfront  {\ldots}  grade  sqft\_above  \textbackslash{}
+        0         1180      5650     1.0           0  {\ldots}      7        1180   
+        1         2570      7242     2.0           0  {\ldots}      7        2170   
+        2          770     10000     1.0           0  {\ldots}      6         770   
+        3         1960      5000     1.0           0  {\ldots}      7        1050   
+        4         1680      8080     1.0           0  {\ldots}      8        1680   
+        
+           sqft\_basement  yr\_built  yr\_renovated  zipcode      lat     long  \textbackslash{}
+        0              0      1955             0    98178  47.5112 -122.257   
+        1            400      1951          1991    98125  47.7210 -122.319   
+        2              0      1933             0    98028  47.7379 -122.233   
+        3            910      1965             0    98136  47.5208 -122.393   
+        4              0      1987             0    98074  47.6168 -122.045   
+        
+           sqft\_living15  sqft\_lot15  
+        0           1340        5650  
+        1           1690        7639  
+        2           2720        8062  
+        3           1360        5000  
+        4           1800        7503  
+        
+        [5 rows x 22 columns]
+\end{Verbatim}
+            
+    \subsection{Question 1}\label{question-1}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  Display the data types of each column using the attribute dtype, then
+  take a screenshot and submit it, include your code in the image.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{df}\PY{o}{.}\PY{n}{dtypes}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} Unnamed: 0         int64
+        id                 int64
+        date              object
+        price            float64
+        bedrooms         float64
+        bathrooms        float64
+        sqft\_living        int64
+        sqft\_lot           int64
+        floors           float64
+        waterfront         int64
+        view               int64
+        condition          int64
+        grade              int64
+        sqft\_above         int64
+        sqft\_basement      int64
+        yr\_built           int64
+        yr\_renovated       int64
+        zipcode            int64
+        lat              float64
+        long             float64
+        sqft\_living15      int64
+        sqft\_lot15         int64
+        dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{n}{include}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{all}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}          Unnamed: 0            id             date         price  \textbackslash{}
+        count   21613.00000  2.161300e+04            21613  2.161300e+04   
+        unique          NaN           NaN              372           NaN   
+        top             NaN           NaN  20140623T000000           NaN   
+        freq            NaN           NaN              142           NaN   
+        mean    10806.00000  4.580302e+09              NaN  5.400881e+05   
+        std      6239.28002  2.876566e+09              NaN  3.671272e+05   
+        min         0.00000  1.000102e+06              NaN  7.500000e+04   
+        25\%      5403.00000  2.123049e+09              NaN  3.219500e+05   
+        50\%     10806.00000  3.904930e+09              NaN  4.500000e+05   
+        75\%     16209.00000  7.308900e+09              NaN  6.450000e+05   
+        max     21612.00000  9.900000e+09              NaN  7.700000e+06   
+        
+                    bedrooms     bathrooms   sqft\_living      sqft\_lot        floors  \textbackslash{}
+        count   21600.000000  21603.000000  21613.000000  2.161300e+04  21613.000000   
+        unique           NaN           NaN           NaN           NaN           NaN   
+        top              NaN           NaN           NaN           NaN           NaN   
+        freq             NaN           NaN           NaN           NaN           NaN   
+        mean        3.372870      2.115736   2079.899736  1.510697e+04      1.494309   
+        std         0.926657      0.768996    918.440897  4.142051e+04      0.539989   
+        min         1.000000      0.500000    290.000000  5.200000e+02      1.000000   
+        25\%         3.000000      1.750000   1427.000000  5.040000e+03      1.000000   
+        50\%         3.000000      2.250000   1910.000000  7.618000e+03      1.500000   
+        75\%         4.000000      2.500000   2550.000000  1.068800e+04      2.000000   
+        max        33.000000      8.000000  13540.000000  1.651359e+06      3.500000   
+        
+                  waterfront  {\ldots}         grade    sqft\_above  sqft\_basement  \textbackslash{}
+        count   21613.000000  {\ldots}  21613.000000  21613.000000   21613.000000   
+        unique           NaN  {\ldots}           NaN           NaN            NaN   
+        top              NaN  {\ldots}           NaN           NaN            NaN   
+        freq             NaN  {\ldots}           NaN           NaN            NaN   
+        mean        0.007542  {\ldots}      7.656873   1788.390691     291.509045   
+        std         0.086517  {\ldots}      1.175459    828.090978     442.575043   
+        min         0.000000  {\ldots}      1.000000    290.000000       0.000000   
+        25\%         0.000000  {\ldots}      7.000000   1190.000000       0.000000   
+        50\%         0.000000  {\ldots}      7.000000   1560.000000       0.000000   
+        75\%         0.000000  {\ldots}      8.000000   2210.000000     560.000000   
+        max         1.000000  {\ldots}     13.000000   9410.000000    4820.000000   
+        
+                    yr\_built  yr\_renovated       zipcode           lat          long  \textbackslash{}
+        count   21613.000000  21613.000000  21613.000000  21613.000000  21613.000000   
+        unique           NaN           NaN           NaN           NaN           NaN   
+        top              NaN           NaN           NaN           NaN           NaN   
+        freq             NaN           NaN           NaN           NaN           NaN   
+        mean     1971.005136     84.402258  98077.939805     47.560053   -122.213896   
+        std        29.373411    401.679240     53.505026      0.138564      0.140828   
+        min      1900.000000      0.000000  98001.000000     47.155900   -122.519000   
+        25\%      1951.000000      0.000000  98033.000000     47.471000   -122.328000   
+        50\%      1975.000000      0.000000  98065.000000     47.571800   -122.230000   
+        75\%      1997.000000      0.000000  98118.000000     47.678000   -122.125000   
+        max      2015.000000   2015.000000  98199.000000     47.777600   -121.315000   
+        
+                sqft\_living15     sqft\_lot15  
+        count    21613.000000   21613.000000  
+        unique            NaN            NaN  
+        top               NaN            NaN  
+        freq              NaN            NaN  
+        mean      1986.552492   12768.455652  
+        std        685.391304   27304.179631  
+        min        399.000000     651.000000  
+        25\%       1490.000000    5100.000000  
+        50\%       1840.000000    7620.000000  
+        75\%       2360.000000   10083.000000  
+        max       6210.000000  871200.000000  
+        
+        [11 rows x 22 columns]
+\end{Verbatim}
+            
+    \subsection{Question -2}\label{question--2}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Drop the columns "id" and "Unnamed: 0" from axis 1 using the method
+  drop(), then use the method describe() to obtain a statistical summary
+  of the data. Take a screenshot and submit it, make sure the inplace
+  parameter is set to True. Your output should look like this:
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Unnamed: 0}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}               price      bedrooms     bathrooms   sqft\_living      sqft\_lot  \textbackslash{}
+        count  2.161300e+04  21600.000000  21603.000000  21613.000000  2.161300e+04   
+        mean   5.400881e+05      3.372870      2.115736   2079.899736  1.510697e+04   
+        std    3.671272e+05      0.926657      0.768996    918.440897  4.142051e+04   
+        min    7.500000e+04      1.000000      0.500000    290.000000  5.200000e+02   
+        25\%    3.219500e+05      3.000000      1.750000   1427.000000  5.040000e+03   
+        50\%    4.500000e+05      3.000000      2.250000   1910.000000  7.618000e+03   
+        75\%    6.450000e+05      4.000000      2.500000   2550.000000  1.068800e+04   
+        max    7.700000e+06     33.000000      8.000000  13540.000000  1.651359e+06   
+        
+                     floors    waterfront          view     condition         grade  \textbackslash{}
+        count  21613.000000  21613.000000  21613.000000  21613.000000  21613.000000   
+        mean       1.494309      0.007542      0.234303      3.409430      7.656873   
+        std        0.539989      0.086517      0.766318      0.650743      1.175459   
+        min        1.000000      0.000000      0.000000      1.000000      1.000000   
+        25\%        1.000000      0.000000      0.000000      3.000000      7.000000   
+        50\%        1.500000      0.000000      0.000000      3.000000      7.000000   
+        75\%        2.000000      0.000000      0.000000      4.000000      8.000000   
+        max        3.500000      1.000000      4.000000      5.000000     13.000000   
+        
+                 sqft\_above  sqft\_basement      yr\_built  yr\_renovated       zipcode  \textbackslash{}
+        count  21613.000000   21613.000000  21613.000000  21613.000000  21613.000000   
+        mean    1788.390691     291.509045   1971.005136     84.402258  98077.939805   
+        std      828.090978     442.575043     29.373411    401.679240     53.505026   
+        min      290.000000       0.000000   1900.000000      0.000000  98001.000000   
+        25\%     1190.000000       0.000000   1951.000000      0.000000  98033.000000   
+        50\%     1560.000000       0.000000   1975.000000      0.000000  98065.000000   
+        75\%     2210.000000     560.000000   1997.000000      0.000000  98118.000000   
+        max     9410.000000    4820.000000   2015.000000   2015.000000  98199.000000   
+        
+                        lat          long  sqft\_living15     sqft\_lot15  
+        count  21613.000000  21613.000000   21613.000000   21613.000000  
+        mean      47.560053   -122.213896    1986.552492   12768.455652  
+        std        0.138564      0.140828     685.391304   27304.179631  
+        min       47.155900   -122.519000     399.000000     651.000000  
+        25\%       47.471000   -122.328000    1490.000000    5100.000000  
+        50\%       47.571800   -122.230000    1840.000000    7620.000000  
+        75\%       47.678000   -122.125000    2360.000000   10083.000000  
+        max       47.777600   -121.315000    6210.000000  871200.000000  
+\end{Verbatim}
+            
+    we have to remove the NaN values from bedrooms and bathrooms
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of NaN values for the column bedrooms :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bedrooms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of NaN values for the column bathrooms :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bathrooms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Number of NaN values for the column bedrooms : 13
+Number of NaN values for the column bathrooms : 10
+
+    \end{Verbatim}
+
+    Replace NaN values with mean of bedrooms and bathrooms using replace
+method
+
+    \subsection{Question 3}\label{question-3}
+
+    3 use the method value\_counts to count the number of houses with unique
+floor values, use the method .to\_frame() to convert it to a dataframe.
+Your output should look like this :
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{mean1}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bedrooms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{mean2}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bathrooms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bedrooms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{,}\PY{n}{mean1}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bathrooms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{,}\PY{n}{mean1}\PY{p}{,}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:}                   date      price  bedrooms  bathrooms  sqft\_living  sqft\_lot  \textbackslash{}
+         0      20141013T000000   221900.0       3.0       1.00         1180      5650   
+         1      20141209T000000   538000.0       3.0       2.25         2570      7242   
+         2      20150225T000000   180000.0       2.0       1.00          770     10000   
+         3      20141209T000000   604000.0       4.0       3.00         1960      5000   
+         4      20150218T000000   510000.0       3.0       2.00         1680      8080   
+         5      20140512T000000  1225000.0       4.0       4.50         5420    101930   
+         6      20140627T000000   257500.0       3.0       2.25         1715      6819   
+         7      20150115T000000   291850.0       3.0       1.50         1060      9711   
+         8      20150415T000000   229500.0       3.0       1.00         1780      7470   
+         9      20150312T000000   323000.0       3.0       2.50         1890      6560   
+         10     20150403T000000   662500.0       3.0       2.50         3560      9796   
+         11     20140527T000000   468000.0       2.0       1.00         1160      6000   
+         12     20140528T000000   310000.0       3.0       1.00         1430     19901   
+         13     20141007T000000   400000.0       3.0       1.75         1370      9680   
+         14     20150312T000000   530000.0       5.0       2.00         1810      4850   
+         15     20150124T000000   650000.0       4.0       3.00         2950      5000   
+         16     20140731T000000   395000.0       3.0       2.00         1890     14040   
+         17     20140529T000000   485000.0       4.0       1.00         1600      4300   
+         18     20141205T000000   189000.0       2.0       1.00         1200      9850   
+         19     20150424T000000   230000.0       3.0       1.00         1250      9774   
+         20     20140514T000000   385000.0       4.0       1.75         1620      4980   
+         21     20140826T000000  2000000.0       3.0       2.75         3050     44867   
+         22     20140703T000000   285000.0       5.0       2.50         2270      6300   
+         23     20140516T000000   252700.0       2.0       1.50         1070      9643   
+         24     20141120T000000   329000.0       3.0       2.25         2450      6500   
+         25     20141103T000000   233000.0       3.0       2.00         1710      4697   
+         26     20140626T000000   937000.0       3.0       1.75         2450      2691   
+         27     20141201T000000   667000.0       3.0       1.00         1400      1581   
+         28     20140624T000000   438000.0       3.0       1.75         1520      6380   
+         29     20150302T000000   719000.0       4.0       2.50         2570      7173   
+         {\ldots}                {\ldots}        {\ldots}       {\ldots}        {\ldots}          {\ldots}       {\ldots}   
+         21583  20140610T000000   399950.0       2.0       1.00          710      1157   
+         21584  20141202T000000   380000.0       3.0       2.50         1260       900   
+         21585  20140828T000000   270000.0       3.0       2.50         1870      5000   
+         21586  20141015T000000   505000.0       2.0       2.50         1430      1201   
+         21587  20150305T000000   385000.0       3.0       2.50         1520      1488   
+         21588  20141113T000000   414500.0       2.0       1.50         1210      1278   
+         21589  20140910T000000   347500.0       3.0       2.50         2540      4760   
+         21590  20140514T000000  1222500.0       4.0       3.50         4910      9444   
+         21591  20141002T000000   572000.0       4.0       2.75         2770      3852   
+         21592  20150416T000000   475000.0       3.0       2.25         1190      1200   
+         21593  20150317T000000  1088000.0       5.0       3.75         4170      8142   
+         21594  20141017T000000   350000.0       4.0       2.75         2500      5995   
+         21595  20141031T000000   520000.0       2.0       2.25         1530       981   
+         21596  20140813T000000   679950.0       5.0       2.75         3600      9437   
+         21597  20150421T000000  1575000.0       4.0       3.25         3410     10125   
+         21598  20141013T000000   541800.0       4.0       2.50         3118      7866   
+         21599  20140915T000000   810000.0       4.0       3.00         3990      7838   
+         21600  20141015T000000  1537000.0       5.0       3.75         4470      8088   
+         21601  20150407T000000   467000.0       3.0       2.50         1425      1179   
+         21602  20140626T000000   224000.0       3.0       1.75         1500     11968   
+         21603  20140825T000000   507250.0       3.0       2.50         2270      5536   
+         21604  20150126T000000   429000.0       3.0       2.00         1490      1126   
+         21605  20141014T000000   610685.0       4.0       2.50         2520      6023   
+         21606  20150326T000000  1007500.0       4.0       3.50         3510      7200   
+         21607  20150219T000000   475000.0       3.0       2.50         1310      1294   
+         21608  20140521T000000   360000.0       3.0       2.50         1530      1131   
+         21609  20150223T000000   400000.0       4.0       2.50         2310      5813   
+         21610  20140623T000000   402101.0       2.0       0.75         1020      1350   
+         21611  20150116T000000   400000.0       3.0       2.50         1600      2388   
+         21612  20141015T000000   325000.0       2.0       0.75         1020      1076   
+         
+                floors  waterfront  view  condition  grade  sqft\_above  sqft\_basement  \textbackslash{}
+         0         1.0           0     0          3      7        1180              0   
+         1         2.0           0     0          3      7        2170            400   
+         2         1.0           0     0          3      6         770              0   
+         3         1.0           0     0          5      7        1050            910   
+         4         1.0           0     0          3      8        1680              0   
+         5         1.0           0     0          3     11        3890           1530   
+         6         2.0           0     0          3      7        1715              0   
+         7         1.0           0     0          3      7        1060              0   
+         8         1.0           0     0          3      7        1050            730   
+         9         2.0           0     0          3      7        1890              0   
+         10        1.0           0     0          3      8        1860           1700   
+         11        1.0           0     0          4      7         860            300   
+         12        1.5           0     0          4      7        1430              0   
+         13        1.0           0     0          4      7        1370              0   
+         14        1.5           0     0          3      7        1810              0   
+         15        2.0           0     3          3      9        1980            970   
+         16        2.0           0     0          3      7        1890              0   
+         17        1.5           0     0          4      7        1600              0   
+         18        1.0           0     0          4      7        1200              0   
+         19        1.0           0     0          4      7        1250              0   
+         20        1.0           0     0          4      7         860            760   
+         21        1.0           0     4          3      9        2330            720   
+         22        2.0           0     0          3      8        2270              0   
+         23        1.0           0     0          3      7        1070              0   
+         24        2.0           0     0          4      8        2450              0   
+         25        1.5           0     0          5      6        1710              0   
+         26        2.0           0     0          3      8        1750            700   
+         27        1.5           0     0          5      8        1400              0   
+         28        1.0           0     0          3      7         790            730   
+         29        2.0           0     0          3      8        2570              0   
+         {\ldots}       {\ldots}         {\ldots}   {\ldots}        {\ldots}    {\ldots}         {\ldots}            {\ldots}   
+         21583     2.0           0     0          4      7         710              0   
+         21584     2.0           0     0          3      7         940            320   
+         21585     2.0           0     0          3      7        1870              0   
+         21586     3.0           0     0          3      8        1430              0   
+         21587     3.0           0     0          3      8        1520              0   
+         21588     2.0           0     0          3      8        1020            190   
+         21589     2.0           0     0          3      8        2540              0   
+         21590     1.5           0     0          3     11        3110           1800   
+         21591     2.0           0     0          3      8        2770              0   
+         21592     3.0           0     0          3      8        1190              0   
+         21593     2.0           0     2          3     10        4170              0   
+         21594     2.0           0     0          3      8        2500              0   
+         21595     3.0           0     0          3      8        1480             50   
+         21596     2.0           0     0          3      9        3600              0   
+         21597     2.0           0     0          3     10        3410              0   
+         21598     2.0           0     2          3      9        3118              0   
+         21599     2.0           0     0          3      9        3990              0   
+         21600     2.0           0     0          3     11        4470              0   
+         21601     3.0           0     0          3      8        1425              0   
+         21602     1.0           0     0          3      6        1500              0   
+         21603     2.0           0     0          3      8        2270              0   
+         21604     3.0           0     0          3      8        1490              0   
+         21605     2.0           0     0          3      9        2520              0   
+         21606     2.0           0     0          3      9        2600            910   
+         21607     2.0           0     0          3      8        1180            130   
+         21608     3.0           0     0          3      8        1530              0   
+         21609     2.0           0     0          3      8        2310              0   
+         21610     2.0           0     0          3      7        1020              0   
+         21611     2.0           0     0          3      8        1600              0   
+         21612     2.0           0     0          3      7        1020              0   
+         
+                yr\_built  yr\_renovated  zipcode      lat     long  sqft\_living15  \textbackslash{}
+         0          1955             0    98178  47.5112 -122.257           1340   
+         1          1951          1991    98125  47.7210 -122.319           1690   
+         2          1933             0    98028  47.7379 -122.233           2720   
+         3          1965             0    98136  47.5208 -122.393           1360   
+         4          1987             0    98074  47.6168 -122.045           1800   
+         5          2001             0    98053  47.6561 -122.005           4760   
+         6          1995             0    98003  47.3097 -122.327           2238   
+         7          1963             0    98198  47.4095 -122.315           1650   
+         8          1960             0    98146  47.5123 -122.337           1780   
+         9          2003             0    98038  47.3684 -122.031           2390   
+         10         1965             0    98007  47.6007 -122.145           2210   
+         11         1942             0    98115  47.6900 -122.292           1330   
+         12         1927             0    98028  47.7558 -122.229           1780   
+         13         1977             0    98074  47.6127 -122.045           1370   
+         14         1900             0    98107  47.6700 -122.394           1360   
+         15         1979             0    98126  47.5714 -122.375           2140   
+         16         1994             0    98019  47.7277 -121.962           1890   
+         17         1916             0    98103  47.6648 -122.343           1610   
+         18         1921             0    98002  47.3089 -122.210           1060   
+         19         1969             0    98003  47.3343 -122.306           1280   
+         20         1947             0    98133  47.7025 -122.341           1400   
+         21         1968             0    98040  47.5316 -122.233           4110   
+         22         1995             0    98092  47.3266 -122.169           2240   
+         23         1985             0    98030  47.3533 -122.166           1220   
+         24         1985             0    98030  47.3739 -122.172           2200   
+         25         1941             0    98002  47.3048 -122.218           1030   
+         26         1915             0    98119  47.6386 -122.360           1760   
+         27         1909             0    98112  47.6221 -122.314           1860   
+         28         1948             0    98115  47.6950 -122.304           1520   
+         29         2005             0    98052  47.7073 -122.110           2630   
+         {\ldots}         {\ldots}           {\ldots}      {\ldots}      {\ldots}      {\ldots}            {\ldots}   
+         21583      1943             0    98102  47.6413 -122.329           1370   
+         21584      2007             0    98116  47.5621 -122.384           1310   
+         21585      2009             0    98042  47.3339 -122.055           2170   
+         21586      2009             0    98107  47.6707 -122.381           1430   
+         21587      2006             0    98125  47.7337 -122.309           1520   
+         21588      2007             0    98117  47.6756 -122.375           1210   
+         21589      2010             0    98038  47.3452 -122.022           2540   
+         21590      2007             0    98074  47.6502 -122.066           4560   
+         21591      2014             0    98178  47.5001 -122.232           1810   
+         21592      2008             0    98103  47.6542 -122.346           1180   
+         21593      2006             0    98056  47.5354 -122.181           3030   
+         21594      2008             0    98042  47.3749 -122.107           2530   
+         21595      2006             0    98103  47.6533 -122.346           1530   
+         21596      2014             0    98059  47.4822 -122.131           3550   
+         21597      2007             0    98040  47.5653 -122.223           2290   
+         21598      2014             0    98001  47.2931 -122.264           2673   
+         21599      2003             0    98053  47.6857 -122.046           3370   
+         21600      2008             0    98004  47.6321 -122.200           2780   
+         21601      2008             0    98125  47.6963 -122.318           1285   
+         21602      2014             0    98010  47.3095 -122.002           1320   
+         21603      2003             0    98065  47.5389 -121.881           2270   
+         21604      2014             0    98144  47.5699 -122.288           1400   
+         21605      2014             0    98056  47.5137 -122.167           2520   
+         21606      2009             0    98136  47.5537 -122.398           2050   
+         21607      2008             0    98116  47.5773 -122.409           1330   
+         21608      2009             0    98103  47.6993 -122.346           1530   
+         21609      2014             0    98146  47.5107 -122.362           1830   
+         21610      2009             0    98144  47.5944 -122.299           1020   
+         21611      2004             0    98027  47.5345 -122.069           1410   
+         21612      2008             0    98144  47.5941 -122.299           1020   
+         
+                sqft\_lot15  
+         0            5650  
+         1            7639  
+         2            8062  
+         3            5000  
+         4            7503  
+         5          101930  
+         6            6819  
+         7            9711  
+         8            8113  
+         9            7570  
+         10           8925  
+         11           6000  
+         12          12697  
+         13          10208  
+         14           4850  
+         15           4000  
+         16          14018  
+         17           4300  
+         18           5095  
+         19           8850  
+         20           4980  
+         21          20336  
+         22           7005  
+         23           8386  
+         24           6865  
+         25           4705  
+         26           3573  
+         27           3861  
+         28           6235  
+         29           6026  
+         {\ldots}           {\ldots}  
+         21583        1173  
+         21584        1415  
+         21585        5399  
+         21586        1249  
+         21587        1497  
+         21588        1118  
+         21589        4571  
+         21590       11063  
+         21591        5641  
+         21592        1224  
+         21593        7980  
+         21594        5988  
+         21595        1282  
+         21596        9421  
+         21597       10125  
+         21598        6500  
+         21599        6814  
+         21600        8964  
+         21601        1253  
+         21602       11303  
+         21603        5731  
+         21604        1230  
+         21605        6023  
+         21606        6200  
+         21607        1265  
+         21608        1509  
+         21609        7200  
+         21610        2007  
+         21611        1287  
+         21612        1357  
+         
+         [21613 rows x 20 columns]
+\end{Verbatim}
+            
+    \subsection{Question 3}\label{question-3}
+
+    3 use the method value\_counts to count the number of houses with unique
+floor values, use the method .to\_frame() to convert it to a dataframe.
+Your output should look like this :
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{Unique\PYZus{}floors} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{floors}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{to\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{Unique\PYZus{}floors}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:}      floors
+         1.0   10680
+         2.0    8241
+         1.5    1910
+         3.0     613
+         2.5     161
+         3.5       8
+\end{Verbatim}
+            
+    \subsection{Question 4}\label{question-4}
+
+    4-a use the function boxplot in the seaborn library to produce a plot
+that can be used to determine whether houses with a waterfront view or
+without a waterfront view have more price outliers. Your output should
+look like this with the code that produced it (the colors may be
+different ) :
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{waterfront}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data} \PY{o}{=}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f0f7ddd7e80>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    4-b Use the function regplot in the seaborn library to determine if the
+feature sqft\_above is negatively or positively correlated with price.
+Take a screenshot of the plot and the code used to generate it. Your
+output should look like this with the code that produced it :
+
+    \subsection{Question 5}\label{question-5}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{regplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sqft\PYZus{}above}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f0f7da9d320>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    4.c Fit a linear regression model to predict the price using the feature
+'sqft\_living' then calculate the R\^{}2. Take a screenshot of your code
+and the value of the R\^{}2.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{df}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} zipcode         -0.053203
+         long             0.021626
+         condition        0.036362
+         yr\_built         0.054012
+         sqft\_lot15       0.082447
+         sqft\_lot         0.089661
+         yr\_renovated     0.126434
+         floors           0.256794
+         waterfront       0.266369
+         lat              0.307003
+         bedrooms         0.308797
+         sqft\_basement    0.323816
+         view             0.397293
+         bathrooms        0.525223
+         sqft\_living15    0.585379
+         sqft\_above       0.605567
+         grade            0.667434
+         sqft\_living      0.702035
+         price            1.000000
+         Name: price, dtype: float64
+\end{Verbatim}
+            
+    Fit a linear regression model to predict the price using the feature
+'sqft\_living' then calculate the R\^{}2. Take a screenshot of your code
+and the value of the R\^{}2.
+
+    \subsection{Question 6}\label{question-6}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{X} \PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sqft\PYZus{}living}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{Y}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{lr} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{lr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{Y}\PY{p}{)}
+         \PY{n}{Ypredict} \PY{o}{=} \PY{n}{lr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{n}{lr}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{Y}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:} 0.49285321790379316
+\end{Verbatim}
+            
+    \subsection{Question 7}\label{question-7}
+
+    Fit a linear regression model to predict the 'price' using the list of
+features:
+
+"floors" "waterfront" "lat" "bedrooms" "sqft\_basement" "view"
+"bathrooms" "sqft\_living15" "sqft\_above" "grade" "sqft\_living" The
+calculate the R\^{}2. Take a screenshot of your code and the value of
+the R\^{}2.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{X} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{floors}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{waterfront}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lat}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bedrooms}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sqft\PYZus{}basement}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{view}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bathrooms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sqft\PYZus{}living15}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sqft\PYZus{}above}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grade}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sqft\PYZus{}living}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{Y}\PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{lr2} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{lr2}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{Y}\PY{p}{)}
+         \PY{n}{YPredict} \PY{o}{=} \PY{n}{lr2}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{n}{lr2}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{Y}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}69}]:} 0.6576832844821977
+\end{Verbatim}
+            
+    \subsection{Question 8}\label{question-8}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{Input} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{scale}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{polynomial}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{PolynomialFeatures}\PY{p}{(}\PY{n}{include\PYZus{}bias}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{model}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{pipe} \PY{o}{=} \PY{n}{Pipeline}\PY{p}{(}\PY{n}{Input}\PY{p}{)}
+         \PY{n}{pipe}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:} Pipeline(memory=None,
+              steps=[('scale', StandardScaler(copy=True, with\_mean=True, with\_std=True)), ('polynomial', PolynomialFeatures(degree=2, include\_bias=False, interaction\_only=False)), ('model', LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=None,
+                  normalize=False))])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{pipe}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{Y}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/opt/conda/envs/Python36/lib/python3.6/site-packages/sklearn/preprocessing/data.py:645: DataConversionWarning: Data with input dtype int64 were all converted to float64 by StandardScaler.
+  return self.partial\_fit(X, y)
+/opt/conda/envs/Python36/lib/python3.6/site-packages/sklearn/base.py:467: DataConversionWarning: Data with input dtype int64 were all converted to float64 by StandardScaler.
+  return self.fit(X, y, **fit\_params).transform(X)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:} Pipeline(memory=None,
+              steps=[('scale', StandardScaler(copy=True, with\_mean=True, with\_std=True)), ('polynomial', PolynomialFeatures(degree=2, include\_bias=False, interaction\_only=False)), ('model', LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=None,
+                  normalize=False))])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{pipe}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{Y}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/opt/conda/envs/Python36/lib/python3.6/site-packages/sklearn/pipeline.py:511: DataConversionWarning: Data with input dtype int64 were all converted to float64 by StandardScaler.
+  Xt = transform.transform(Xt)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}50}]:} 0.5327430940591443
+\end{Verbatim}
+            
+    \subsection{Question - 9}\label{question---9}
+
+    Create and fit a Ridge regression object using the training data,
+setting the regularization parameter to 0.1 and calculate the R\^{}2
+using the test data. Take a screenshot for your code and the R\^{}2
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{X} \PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{floors}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{waterfront}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lat}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bedrooms}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sqft\PYZus{}basement}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{view}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bathrooms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sqft\PYZus{}living15}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sqft\PYZus{}above}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grade}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sqft\PYZus{}living}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}  \PY{p}{]}
+         \PY{n}{Y} \PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.15}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test samples = }\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{n}{x\PYZus{}test}\PY{o}{.}\PY{n}{shape} \PY{p}{,} \PY{n}{end} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train samples = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+test samples =  (3242, 11),train samples =  (18371, 11)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{Rig} \PY{o}{=} \PY{n}{Ridge}\PY{p}{(}\PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.1}\PY{p}{)}
+         \PY{n}{Rig}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{Rig}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}66}]:} 0.647865900687054
+\end{Verbatim}
+            
+    \subsection{Question -10}\label{question--10}
+
+    10.Perform a second order polynomial transform on both the training data
+and testing data. Create and fit a Ridge regression object using the
+training data, setting the regularisation parameter to 0.1. Calculate
+the R\^{}2 utilising the test data provided. Take a screenshot of your
+code and the R\^{}2.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{n}{pf} \PY{o}{=} \PY{n}{PolynomialFeatures}\PY{p}{(}\PY{n}{degree}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{x\PYZus{}trainpf} \PY{o}{=} \PY{n}{pf}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{)}
+         \PY{n}{x\PYZus{}testpf}  \PY{o}{=} \PY{n}{pf}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{)}
+         \PY{n}{Rig2} \PY{o}{=} \PY{n}{Ridge}\PY{p}{(}\PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}
+         \PY{n}{Rig2}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}trainpf}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{Rig2}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{x\PYZus{}testpf}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}68}]:} 0.7001498438803453
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
